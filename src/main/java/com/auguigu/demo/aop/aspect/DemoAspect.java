@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/7/15 16:52
  */
 @Aspect
-@Component
+//@Component
 public class DemoAspect {
 
     @Around("@annotation(aopDemo)")
