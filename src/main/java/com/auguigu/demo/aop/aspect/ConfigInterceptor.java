@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Songwe
  * @date 2022/4/12 20:48
  */
-@Configuration
+//@Configuration
 public class ConfigInterceptor {
     private static final AnnotationMatchingPointcut POINTCUT = AnnotationMatchingPointcut.forMethodAnnotation(AOPDemo.class);
     

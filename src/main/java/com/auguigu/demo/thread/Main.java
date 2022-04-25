@@ -1,7 +1,5 @@
 package com.auguigu.demo.thread;
 
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-
 /**
  * @author Songwe
  * @date 2021/4/22 21:04
