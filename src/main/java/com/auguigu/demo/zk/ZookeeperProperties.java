@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "zookeeper")
-public class ZooKeeperProperties {
+public class ZookeeperProperties {
     private String connectString;
     private String namespace;
     private int sessionTimeout = 60000;

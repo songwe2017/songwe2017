@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(ZooKeeperProperties.class)
+@EnableConfigurationProperties(ZookeeperProperties.class)
 public class ZookeeperConfig {
     @Autowired
-    private ZooKeeperProperties properties;
+    private ZookeeperProperties properties;
     
     @Bean
     public CuratorFramework curatorFramework() {
