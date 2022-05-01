@@ -2,7 +2,7 @@
 <configuration debug="true" scan="true" scanPeriod="180 seconds">>
     <!-- 日志文件目录 -->
     <property name="log.dir" value="${LOG_DIR:-.logs}"/>
-    <property name="log.level" value="${LOG_LEVEL:-INFO}"/>
+    <property name="log.level" value="${LOG_LEVEL:-DEBUG}"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <withJansi>true</withJansi>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @author Songwe
  * @date 2022/4/24 20:41
  */
-@Component
+//@Component
 public class TestScheduleTask {
     
     @Scheduled(cron = "0/5 * * * * ?")

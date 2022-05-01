@@ -1,41 +1,102 @@
-2022-04-24 16:49:16,826 [SpringContextShutdownHook][] INFO  o.s.s.c.ThreadPoolTaskExecutor Shutting down ExecutorService 'applicationTaskExecutor' 
-2022-04-24 20:44:11,934 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 24816 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
-2022-04-24 20:44:11,934 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
-2022-04-24 20:44:11,934 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
-2022-04-24 20:44:14,062 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
-2022-04-24 20:44:14,072 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:44:14,072 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
-2022-04-24 20:44:14,072 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
-2022-04-24 20:44:14,192 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
-2022-04-24 20:44:14,192 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 2196 ms 
-2022-04-24 20:44:14,752 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
-2022-04-24 20:44:14,992 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:44:15,028 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
-2022-04-24 20:44:15,038 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 3.809 seconds (JVM running for 6.111) 
-2022-04-24 20:53:02,821 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
-2022-04-24 20:53:02,832 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 14604 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
-2022-04-24 20:53:02,833 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
-2022-04-24 20:53:04,347 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
-2022-04-24 20:53:04,357 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:53:04,357 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
-2022-04-24 20:53:04,357 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
-2022-04-24 20:53:04,467 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
-2022-04-24 20:53:04,467 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1555 ms 
-2022-04-24 20:53:04,988 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
-2022-04-24 20:53:05,208 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:53:05,238 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
-2022-04-24 20:53:05,248 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 3.384 seconds (JVM running for 5.799) 
-2022-04-24 20:54:24,337 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 26652 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
-2022-04-24 20:54:24,337 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
-2022-04-24 20:54:24,340 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
-2022-04-24 20:54:25,692 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
-2022-04-24 20:54:25,703 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:54:25,704 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
-2022-04-24 20:54:25,704 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
-2022-04-24 20:54:25,813 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
-2022-04-24 20:54:25,813 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1421 ms 
-2022-04-24 20:54:26,363 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
-2022-04-24 20:54:26,561 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
-2022-04-24 20:54:26,591 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
-2022-04-24 20:54:26,611 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
-2022-04-24 20:54:26,631 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 2.929 seconds (JVM running for 5.22) 
+2022-05-01 22:37:57,288 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 28840 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:37:57,283 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:37:57,296 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:37:59,798 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:37:59,813 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:37:59,814 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:37:59,815 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:38:00,202 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:38:00,203 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 2826 ms 
+2022-05-01 22:38:00,891 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:38:00,892 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:38:00,892 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:38:01,088 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:38:01,424 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:38:01,476 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:38:01,503 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:38:01,521 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 4.966 seconds (JVM running for 7.777) 
+2022-05-01 22:41:37,097 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:41:37,102 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 17812 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:41:37,104 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:41:38,521 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:41:38,533 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:41:38,533 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:41:38,533 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:41:38,642 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:41:38,642 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1479 ms 
+2022-05-01 22:41:39,043 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:41:39,043 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:41:39,043 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:41:39,185 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:41:39,408 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:41:39,442 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:41:39,463 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:41:39,476 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 3.018 seconds (JVM running for 5.105) 
+2022-05-01 22:43:04,527 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 12516 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:43:04,524 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:43:04,529 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:43:05,779 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:43:05,787 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:43:05,788 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:43:05,788 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:43:05,901 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:43:05,902 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1315 ms 
+2022-05-01 22:43:06,298 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:43:06,298 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:43:06,299 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:43:06,444 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:43:06,648 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:43:06,681 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:43:06,703 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:43:06,715 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 2.613 seconds (JVM running for 4.673) 
+2022-05-01 22:45:11,328 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:45:11,334 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 18952 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:45:11,335 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:45:12,686 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:45:12,697 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:45:12,698 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:45:12,698 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:45:12,809 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:45:12,809 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1401 ms 
+2022-05-01 22:45:13,206 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:45:13,206 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:45:13,207 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:45:13,348 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:45:13,553 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:45:13,592 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:45:13,616 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:45:13,630 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 2.879 seconds (JVM running for 5.057) 
+2022-05-01 22:46:46,376 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:46:46,375 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 41956 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:46:46,384 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:46:48,099 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:46:48,107 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:46:48,108 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:46:48,109 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:46:48,210 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:46:48,210 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1732 ms 
+2022-05-01 22:46:48,579 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:46:48,579 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:46:48,580 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:46:48,739 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:46:48,949 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:46:48,982 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:46:49,003 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:46:49,017 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 3.389 seconds (JVM running for 5.524) 
+2022-05-01 22:47:02,681 [main][] INFO  c.a.d.DemoApplication Starting DemoApplication using Java 1.8.0_102 on LAPTOP-4AHHCIO7 with PID 41392 (D:\workspace\wrokspace-spring\songwe2017\target\classes started by Songbing in D:\workspace\wrokspace-spring\songwe2017) 
+2022-05-01 22:47:02,684 [main][] INFO  c.a.d.DemoApplication No active profile set, falling back to default profiles: default 
+2022-05-01 22:47:02,694 [background-preinit][] INFO  o.h.v.i.u.Version HV000001: Hibernate Validator 5.0.1.Final 
+2022-05-01 22:47:04,047 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8086 (http) 
+2022-05-01 22:47:04,059 [main][] INFO  o.a.c.h.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:47:04,060 [main][] INFO  o.a.c.c.StandardService Starting service [Tomcat] 
+2022-05-01 22:47:04,061 [main][] INFO  o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.41] 
+2022-05-01 22:47:04,204 [main][] INFO  o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext 
+2022-05-01 22:47:04,205 [main][] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1439 ms 
+2022-05-01 22:47:04,736 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static java.lang.String com.auguigu.demo.zk.CuratorDemo.connectString 
+2022-05-01 22:47:04,737 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.sessionTimeout 
+2022-05-01 22:47:04,737 [main][] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor Autowired annotation is not supported on static fields: private static int com.auguigu.demo.zk.CuratorDemo.connectionTimeout 
+2022-05-01 22:47:04,869 [main][] INFO  o.s.s.c.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor' 
+2022-05-01 22:47:05,078 [main][] INFO  o.s.s.c.ThreadPoolTaskScheduler Initializing ExecutorService 'taskScheduler' 
+2022-05-01 22:47:05,114 [main][] INFO  o.a.c.h.Http11NioProtocol Starting ProtocolHandler ["http-nio-8086"] 
+2022-05-01 22:47:05,140 [main][] INFO  o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8086 (http) with context path '' 
+2022-05-01 22:47:05,152 [main][] INFO  c.a.d.DemoApplication Started DemoApplication in 3.179 seconds (JVM running for 5.279) 
