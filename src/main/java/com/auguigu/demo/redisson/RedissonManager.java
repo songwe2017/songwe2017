@@ -1,8 +1,8 @@
 package com.auguigu.demo.redisson;
 
 import com.auguigu.demo.redisson.constant.RedisConnectionType;
-import com.auguigu.demo.redisson.entity.RedissonProperties;
-import com.auguigu.demo.redisson.strategy.RedissonConfigService;
+import com.auguigu.demo.redisson.property.RedisProperties;
+import com.auguigu.demo.redisson.strategy.RedisConfigService;
 import com.auguigu.demo.redisson.strategy.impl.ClusterConfigImpl;
 import com.auguigu.demo.redisson.strategy.impl.MasterslaveConfigImpl;
 import com.auguigu.demo.redisson.strategy.impl.SentineConfigImpl;
@@ -11,9 +11,7 @@ import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.util.Assert;
 
 
 /**
@@ -24,22 +22,18 @@ import java.util.Map;
  */
 @Slf4j
 public class RedissonManager {
+    
+    private final Redisson redisson;
 
-
-    private Config config = new Config();
-
-    private Redisson redisson = null;
-
-    public RedissonManager(RedissonProperties redissonProperties) {
-
+    public RedissonManager(RedisProperties redisProperties) {
         try {
             //通过不同部署方式获得不同cofig实体
-            config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
+            Config config = RedisConfigFactory.getInstance().createConfig(redisProperties);
             redisson = (Redisson) Redisson.create(config);
         } catch (Exception e) {
             log.error("Redisson init error", e);
             throw new IllegalArgumentException("please input correct configurations," +
-                    "connectionType must in standalone/sentinel/cluster/masterslave");
+                    "connectionType must in standalone/sentinel/cluster/master-slave");
         }
     }
 
@@ -51,20 +45,14 @@ public class RedissonManager {
      * Redisson连接方式配置工厂
      * 双重检查锁
      */
-    static class RedissonConfigFactory {
+    static class RedisConfigFactory {
+        private static volatile RedisConfigFactory factory = null;
 
-        private static final Map<String, RedissonConfigService> SERVICE_MAP = new HashMap<>();
-
-        private RedissonConfigFactory() {
-        }
-
-        private static volatile RedissonConfigFactory factory = null;
-
-        public static RedissonConfigFactory getInstance() {
+        public static RedisConfigFactory getInstance() {
             if (factory == null) {
-                synchronized (Object.class) {
+                synchronized (factory) {
                     if (factory == null) {
-                        factory = new RedissonConfigFactory();
+                        factory = new RedisConfigFactory();
                     }
                 }
             }
@@ -74,17 +62,16 @@ public class RedissonManager {
         /**
          * 根据连接类型获取对应连接方式的配置,基于策略模式
          *
-         * @param redissonProperties redis连接信息
+         * @param redisProperties redis连接信息
          * @return Config
          */
-        Config createConfig(RedissonProperties redissonProperties) {
-            Preconditions.checkNotNull(redissonProperties);
-            Preconditions.checkNotNull(redissonProperties.getAddress(), "redisson.lock.server.address cannot be NULL!");
-            Preconditions.checkNotNull(redissonProperties.getType(), "redisson.lock.server.password cannot be NULL");
-            Preconditions.checkNotNull(redissonProperties.getDatabase(), "redisson.lock.server.database cannot be NULL");
-            String connectionType = redissonProperties.getType();
+        Config createConfig(RedisProperties redisProperties) {
+            Assert.notNull(redisProperties.getAddress(), "redisson.lock.server.address cannot be null!");
+            Assert.notNull(redisProperties.getType(), "redisson.lock.server.password cannot be null!");
+            Assert.notNull(redisProperties.getDatabase(), "redisson.lock.server.database cannot be null!");
+            String connectionType = redisProperties.getType();
             //声明配置上下文
-            RedissonConfigService redissonConfigService = null;
+            RedisConfigService redissonConfigService = null;
             if (connectionType.equals(RedisConnectionType.STANDALONE.getConnection_type())) {
                 redissonConfigService = new StandaloneConfigImpl();
             } else if (connectionType.equals(RedisConnectionType.SENTINEL.getConnection_type())) {
@@ -96,7 +83,7 @@ public class RedissonManager {
             } else {
                 throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
             }
-            return redissonConfigService.createRedissonConfig(redissonProperties);
+            return redissonConfigService.createRedisConfig(redisProperties);
         }
     }
 }

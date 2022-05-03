@@ -2,8 +2,8 @@ package com.auguigu.demo.redisson.strategy.impl;
 
 
 import com.auguigu.demo.redisson.constant.GlobalConstant;
-import com.auguigu.demo.redisson.entity.RedissonProperties;
-import com.auguigu.demo.redisson.strategy.RedissonConfigService;
+import com.auguigu.demo.redisson.property.RedisProperties;
+import com.auguigu.demo.redisson.strategy.RedisConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
@@ -15,20 +15,20 @@ import java.util.List;
  * @Description:  主从部署Redisson配置
  *       连接方式:  主节点,子节点,子节点
  *         格式为:  127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381
- * @author xub
+ * @author songwe
  * @date 2019/6/19 下午9:21
  */
 
 @Slf4j
-public class MasterslaveConfigImpl implements RedissonConfigService {
+public class MasterslaveConfigImpl implements RedisConfigService {
 
     @Override
-    public Config createRedissonConfig(RedissonProperties redissonProperties) {
+    public Config createRedisConfig(RedisProperties redisProperties) {
         Config config = new Config();
         try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            int database = redissonProperties.getDatabase();
+            String address = redisProperties.getAddress();
+            String password = redisProperties.getPassword();
+            int database = redisProperties.getDatabase();
             String[] addrTokens = address.split(",");
             String masterNodeAddr = addrTokens[0];
             //设置主节点ip

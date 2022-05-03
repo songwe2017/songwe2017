@@ -1,11 +1,14 @@
-package com.auguigu.demo.zk;
+package com.auguigu.demo.zookeeper.config;
 
+import com.auguigu.demo.zookeeper.property.ZookeeperProperties;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,12 +19,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @EnableConfigurationProperties(ZookeeperProperties.class)
-public class ZookeeperConfig {
-    @Autowired
-    private ZookeeperProperties properties;
+public class ZookeeperConfiguration {
+    
+    private final ZookeeperProperties properties;
     
     @Bean
+    @ConditionalOnMissingBean
     public CuratorFramework curatorFramework() {
         ExponentialBackoffRetry retryPolicy = new ExponentialBackoffRetry(properties.getBaseSleepTime(), properties.getMaxRetries());
         CuratorFramework zkClient = CuratorFrameworkFactory.builder()
@@ -34,7 +39,10 @@ public class ZookeeperConfig {
         
         zkClient.getConnectionStateListenable().addListener((client, state) -> {
             if (state == ConnectionState.CONNECTED) {
-                log.info("连接成功！");
+                log.info("Curator 连接成功！");
+            }
+            if (state == ConnectionState.LOST) {
+                log.info("Curator 连接断开！");
             }
         });
         zkClient.start();

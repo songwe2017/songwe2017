@@ -2,8 +2,8 @@ package com.auguigu.demo.redisson.strategy.impl;
 
 
 import com.auguigu.demo.redisson.constant.GlobalConstant;
-import com.auguigu.demo.redisson.entity.RedissonProperties;
-import com.auguigu.demo.redisson.strategy.RedissonConfigService;
+import com.auguigu.demo.redisson.property.RedisProperties;
+import com.auguigu.demo.redisson.strategy.RedisConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
@@ -11,20 +11,21 @@ import org.redisson.config.Config;
 /**
  * @Description: 单机部署Redisson配置
  *
- * @author xub
+ * @author songwe
  * @date 2019/6/19 下午10:04
  */
 @Slf4j
-public class StandaloneConfigImpl implements RedissonConfigService {
+public class StandaloneConfigImpl implements RedisConfigService {
 
     @Override
-    public Config createRedissonConfig(RedissonProperties redissonProperties) {
+    public Config createRedisConfig(RedisProperties redisProperties) {
         Config config = new Config();
         try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            int database = redissonProperties.getDatabase();
+            String address = redisProperties.getAddress();
+            String password = redisProperties.getPassword();
+            int database = redisProperties.getDatabase();
             String redisAddr = GlobalConstant.REDIS_CONNECTION_PREFIX.getConstant_value() + address;
+            
             config.useSingleServer().setAddress(redisAddr);
             config.useSingleServer().setDatabase(database);
             //密码可以为空

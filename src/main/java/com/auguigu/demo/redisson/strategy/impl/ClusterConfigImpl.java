@@ -2,8 +2,8 @@ package com.auguigu.demo.redisson.strategy.impl;
 
 
 import com.auguigu.demo.redisson.constant.GlobalConstant;
-import com.auguigu.demo.redisson.entity.RedissonProperties;
-import com.auguigu.demo.redisson.strategy.RedissonConfigService;
+import com.auguigu.demo.redisson.property.RedisProperties;
+import com.auguigu.demo.redisson.strategy.RedisConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
@@ -14,18 +14,18 @@ import org.redisson.config.Config;
  *          cluster方式至少6个节点(3主3从，3主做sharding，3从用来保证主宕机后可以高可用)
  *          格式为: 127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384
  *
- * @author xub
+ * @author songwe
  * @date 2019/6/19 下午4:24
  */
 @Slf4j
-public class ClusterConfigImpl implements RedissonConfigService {
+public class ClusterConfigImpl implements RedisConfigService {
 
     @Override
-    public Config createRedissonConfig(RedissonProperties redissonProperties) {
+    public Config createRedisConfig(RedisProperties redisProperties) {
         Config config = new Config();
         try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
+            String address = redisProperties.getAddress();
+            String password = redisProperties.getPassword();
             String[] addrTokens = address.split(",");
             //设置cluster节点的服务IP和端口
             for (int i = 0; i < addrTokens.length; i++) {

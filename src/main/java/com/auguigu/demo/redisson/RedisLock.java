@@ -1,5 +1,6 @@
 package com.auguigu.demo.redisson;
 
+import com.auguigu.demo.redisson.property.RedisProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
@@ -7,26 +8,18 @@ import org.redisson.api.RLock;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: 针对源码Redisson进行一层封装
- *
- * @author xub
+ * @author songwe
  * @date 2019/6/19 下午10:26
  */
 @Slf4j
-public class RedissonLock {
+public class RedisLock {
+    
+    private final Redisson redisson;
 
-
-  private  RedissonManager redissonManager;
-  private Redisson redisson;
-
-
-    public RedissonLock(RedissonManager redissonManager) {
-        this.redissonManager = redissonManager;
-        this.redisson = redissonManager.getRedisson();
+    public RedisLock(RedissonManager manager) {
+        this.redisson = manager.getRedisson();
     }
-
-    public RedissonLock() {}
-
+    
     /**
      * 加锁操作 （设置锁的有效时间）
      * @param lockName 锁名称
@@ -52,7 +45,6 @@ public class RedissonLock {
      * @param leaseTime 锁有效时间
      */
     public boolean tryLock(String lockName, long leaseTime) {
-
         RLock rLock = redisson.getLock(lockName);
         boolean getLock = false;
         try {
@@ -110,13 +102,5 @@ public class RedissonLock {
     public boolean isHeldByCurrentThread(String lockName) {
         RLock rLock = redisson.getLock(lockName);
         return rLock.isHeldByCurrentThread();
-    }
-
-    public RedissonManager getRedissonManager() {
-        return redissonManager;
-    }
-
-    public void setRedissonManager(RedissonManager redissonManager) {
-        this.redissonManager = redissonManager;
     }
 }

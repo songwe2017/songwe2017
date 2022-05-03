@@ -3,6 +3,7 @@ package com.auguigu.demo;
 import com.auguigu.demo.lock.LockDemo;
 import com.auguigu.demo.model.User;
 import com.auguigu.demo.service.UserService;
+import com.auguigu.demo.zookeeper.ZKOperator;
 import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,6 +27,33 @@ import java.util.concurrent.Executors;
 class DemoApplicationTests {
     private final UserService userService;
     private final LockDemo lockDemo;
+    private final ZKOperator operator;
+    
+    @Test
+    public void testExist() throws Exception {
+        String path = "/locks";
+        boolean exist = operator.isExist(path);
+        System.out.println(exist);
+    }
+    
+    @Test
+    public void testDeletNode() throws Exception {
+        String path = "/";
+        operator.deleteNode(path);
+    }
+    
+    @Test
+    public void testSetData() throws Exception {
+        String path = "/locks";
+        operator.setNodeData(path, "hello");
+    }
+    
+    @Test
+    public void testAddWatch() throws IOException {
+        String path = "/locks";
+        operator.addWatchWithNodeCache(path);
+        System.in.read();
+    }
     
     @Test
     public void testPushConsumeMq() throws Exception {

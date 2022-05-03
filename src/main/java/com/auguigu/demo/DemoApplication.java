@@ -15,9 +15,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan(basePackages = "com.auguigu.demo.mapper")
 @EnableScheduling
 @SpringBootApplication
-@ComponentScan(excludeFilters = {
-		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.auguigu.demo.redisson.*")
-})
+//@ComponentScan(excludeFilters = {
+//		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.auguigu.demo.redisson.*")
+//})
 public class DemoApplication {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext application = SpringApplication.run(DemoApplication.class, args);

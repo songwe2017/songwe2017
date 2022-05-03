@@ -2,8 +2,8 @@ package com.auguigu.demo.redisson.strategy.impl;
 
 
 import com.auguigu.demo.redisson.constant.GlobalConstant;
-import com.auguigu.demo.redisson.entity.RedissonProperties;
-import com.auguigu.demo.redisson.strategy.RedissonConfigService;
+import com.auguigu.demo.redisson.property.RedisProperties;
+import com.auguigu.demo.redisson.strategy.RedisConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
@@ -12,21 +12,21 @@ import org.redisson.config.Config;
 /**
  * @Description: 哨兵集群部署Redis连接配置
  *
- * @author xub
+ * @author songwe
  * @date 2019/6/19 下午9:17
  */
 @Slf4j
-public class SentineConfigImpl implements RedissonConfigService {
+public class SentineConfigImpl implements RedisConfigService {
 
 
 
     @Override
-    public Config createRedissonConfig(RedissonProperties redissonProperties) {
+    public Config createRedisConfig(RedisProperties redisProperties) {
         Config config = new Config();
         try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            int database = redissonProperties.getDatabase();
+            String address = redisProperties.getAddress();
+            String password = redisProperties.getPassword();
+            int database = redisProperties.getDatabase();
             String[] addrTokens = address.split(",");
             String sentinelAliasName = addrTokens[0];
             //设置redis配置文件sentinel.conf配置的sentinel别名
