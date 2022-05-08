@@ -50,7 +50,7 @@ public class RedissonManager {
 
         public static RedisConfigFactory getInstance() {
             if (factory == null) {
-                synchronized (factory) {
+                synchronized (RedisConfigFactory.class) {
                     if (factory == null) {
                         factory = new RedisConfigFactory();
                     }
