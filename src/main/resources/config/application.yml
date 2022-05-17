@@ -8,7 +8,7 @@ spring:
     password: 1234
 
 mybatis:
-  mapper-locations: "classpath*:com/auguigu/demo/mapper/*Mapper.xml"
+  mapper-locations: "classpath*:com/admin/demo/mapper/*Mapper.xml"
 
 zookeeper:
   #服务器地址
