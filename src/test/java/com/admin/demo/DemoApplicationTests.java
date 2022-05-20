@@ -1,9 +1,10 @@
 package com.admin.demo;
 
-import com.admin.demo.lock.LockDemo;
-import com.admin.demo.model.User;
+import com.admin.demo.entity.User;
+import com.admin.demo.mapper.UserMapper;
 import com.admin.demo.service.UserService;
 import com.admin.demo.zookeeper.ZKOperator;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -19,42 +20,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @SpringBootTest(classes = DemoApplication.class)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class DemoApplicationTests {
     private final UserService userService;
-    private final LockDemo lockDemo;
     private final ZKOperator operator;
-    
+    private final UserMapper userMapper;
+
     @Test
     public void testExist() throws Exception {
         String path = "/locks";
         boolean exist = operator.isExist(path);
         System.out.println(exist);
     }
-    
+
     @Test
     public void testDeletNode() throws Exception {
         String path = "/";
         operator.deleteNode(path);
     }
-    
+
     @Test
     public void testSetData() throws Exception {
         String path = "/locks";
         operator.setNodeData(path, "hello");
     }
-    
+
     @Test
     public void testAddWatch() throws IOException {
         String path = "/locks";
         operator.addWatchWithNodeCache(path);
         System.in.read();
     }
-    
+
     @Test
     public void testPushConsumeMq() throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("dw_test_consumer_6");
@@ -72,10 +71,10 @@ class DemoApplicationTests {
             }
         });
         consumer.start();
-        
+
         System.in.read();
     }
-    
+
     @Test
     public void testSyncMq() throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("testProducerGroup");
@@ -106,10 +105,10 @@ class DemoApplicationTests {
         catch (Throwable e) {
             throw new RuntimeException("异步消息异常", e);
         }
-        
+
         //producer.shutdown();
     }
-    
+
     @Test
     public void testSimpleMq() throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("testProducerGroup");
@@ -120,7 +119,7 @@ class DemoApplicationTests {
         SendResult result;
         result  = producer.send(message);
         System.out.println(result);
-        
+
         message = new Message("TOPIC_TEST", null, "ODS2020072615490001", "{\"id\":1, \"orderNo\":\"ODS2020072615490001\",\"buyerId\":1,\"sellerId\":1  }".getBytes());
         result = producer.send(message);
         System.out.println(result);
@@ -129,21 +128,12 @@ class DemoApplicationTests {
 
     @Test
     public void test() {
-        User user = userService.getUser(null);
-        System.out.println(user);
+        LambdaQueryWrapper<User> search = new LambdaQueryWrapper<User>()
+                .eq(User::getName, "root");
+
+        User select = userMapper.selectOne(search);
+        System.out.println(select);
     }
 
-    @Test
-    public void testLock() throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
-        for (int i = 1; i < 6; i ++) {
-            executorService.execute(() -> {
-                lockDemo.decrease();
-            });
-        }
-        executorService.shutdown();
-        if (!executorService.isTerminated()) {
-            Thread.currentThread().join();
-        }
-    }
 }
+
