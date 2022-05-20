@@ -33,12 +33,27 @@ public class Role implements Serializable {
      */
     private String name;
 
+    /**
+     * 角色标识
+     */
+    private String label;
+
     private Integer disabled;
 
     /**
      * 描述
      */
     private String description;
+
+    /**
+     * 创建时间
+     */
+    private Long createTime;
+
+    /**
+     * 更新时间
+     */
+    private Long updateTime;
 
 
 }

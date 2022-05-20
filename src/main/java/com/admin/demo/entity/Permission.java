@@ -9,7 +9,7 @@ import lombok.ToString;
 
 /**
  * <p>
- * 用户表
+ * 权限表
  * </p>
  *
  * @author songwe
@@ -18,7 +18,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User implements Serializable {
+public class Permission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,38 +29,55 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 登录名称
+     * 父权限
+     */
+    private String parentLabel;
+
+    /**
+     * 权限名称
      */
     private String name;
 
     /**
-     * 密码
+     * 权限路径
      */
-    private String password;
+    private String path;
 
     /**
-     * 性别：0-男、1-女
+     * 权限标识
      */
-    private Integer sex;
+    private String label;
 
     /**
-     * 密码的盐
+     * 图标
      */
-    private String salt;
+    private String icon;
 
     /**
-     * 邮箱
+     * 是否叶子节点
      */
-    private String email;
+    private Integer isLeaf;
 
     /**
-     * 电话
+     * 是否根节点
      */
-    private String phone;
+    private Integer isRoot;
 
     /**
-     * 0、禁用 1、正常
+     * 权限类型
      */
+    private String type;
+
+    /**
+     * 系统标识
+     */
+    private String system;
+
+    /**
+     * 描述
+     */
+    private String description;
+
     private Integer disabled;
 
     /**

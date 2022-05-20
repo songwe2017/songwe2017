@@ -2,6 +2,7 @@ package com.admin.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 
 /**
  * <p>
- * 用户表
+ * 用户角色关联表
  * </p>
  *
  * @author songwe
@@ -18,7 +19,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User implements Serializable {
+@TableName("user_role_rel")
+public class UserRoleRel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,38 +31,15 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 登录名称
+     * 用户ID
      */
-    private String name;
+    private Long userId;
 
     /**
-     * 密码
+     * 角色ID
      */
-    private String password;
+    private Long roleId;
 
-    /**
-     * 性别：0-男、1-女
-     */
-    private Integer sex;
-
-    /**
-     * 密码的盐
-     */
-    private String salt;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
-     * 电话
-     */
-    private String phone;
-
-    /**
-     * 0、禁用 1、正常
-     */
     private Integer disabled;
 
     /**
