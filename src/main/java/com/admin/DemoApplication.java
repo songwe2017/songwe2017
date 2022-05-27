@@ -10,11 +10,12 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
-@MapperScan(basePackages = "com.admin.demo.mapper")
+@MapperScan(basePackages = "com.admin.mapper")
 @EnableScheduling
 @SpringBootApplication
 @ComponentScan(excludeFilters = {
-		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.admin.demo.redisson.*")
+		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.admin.redisson.*"),
+		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.admin.zookeeper.*")
 })
 public class DemoApplication {
 	public static void main(String[] args) throws Exception {
