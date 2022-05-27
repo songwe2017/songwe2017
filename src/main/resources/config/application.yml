@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8080
 
 spring:
   datasource:
@@ -7,8 +7,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 1234
+  thymeleaf:
+    cache: false
     
-mybatis:
+    
+    
+mybatis-plus:
   mapper-locations: "classpath*:com/admin/demo/mapper/*Mapper.xml"
 
 zookeeper:
@@ -27,6 +31,12 @@ zookeeper:
 
 
 
+
+
+
+
+
+     
 
 
 
