@@ -1,10 +1,10 @@
 package com.admin;
 
-import com.admin.entity.User;
 import com.admin.mapper.UserMapper;
+import com.admin.model.User;
 import com.admin.service.UserService;
-import com.admin.zookeeper.ZKOperator;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -19,40 +19,38 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-
 @SpringBootTest(classes = DemoApplication.class)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class DemoApplicationTests {
     private final UserService userService;
-    private final ZKOperator operator;
+    //private final ZKOperator operator;
     private final UserMapper userMapper;
 
-    @Test
-    public void testExist() throws Exception {
-        String path = "/locks";
-        boolean exist = operator.isExist(path);
-        System.out.println(exist);
-    }
-
-    @Test
-    public void testDeletNode() throws Exception {
-        String path = "/";
-        operator.deleteNode(path);
-    }
-
-    @Test
-    public void testSetData() throws Exception {
-        String path = "/locks";
-        operator.setNodeData(path, "hello");
-    }
-
-    @Test
-    public void testAddWatch() throws IOException {
-        String path = "/locks";
-        operator.addWatchWithNodeCache(path);
-        System.in.read();
-    }
+    //@Test
+    //public void testExist() throws Exception {
+    //    String path = "/locks";
+    //    boolean exist = operator.isExist(path);
+    //    System.out.println(exist);
+    //}
+    //
+    //@Test
+    //public void testDeletNode() throws Exception {
+    //    String path = "/";
+    //    operator.deleteNode(path);
+    //}
+    //
+    //@Test
+    //public void testSetData() throws Exception {
+    //    String path = "/locks";
+    //    operator.setNodeData(path, "hello");
+    //}
+    //
+    //@Test
+    //public void testAddWatch() throws IOException {
+    //    String path = "/locks";
+    //    operator.addWatchWithNodeCache(path);
+    //    System.in.read();
+    //}
 
     @Test
     public void testPushConsumeMq() throws Exception {
@@ -127,13 +125,26 @@ class DemoApplicationTests {
     }
 
     @Test
-    public void test() {
+    public void test() throws JsonProcessingException {
         LambdaQueryWrapper<User> search = new LambdaQueryWrapper<User>()
                 .eq(User::getName, "root");
 
         User select = userMapper.selectOne(search);
+
+        //User user = new User();
+        //user.setId(1530560131883700225L);
+        //user.setName("admin");
+        //user.setPassword("123");
+        //user.setPhone("138");
+        //int insert = userMapper.updateById(user);
+
+        //Page<User> page = new Page<>(1, 2);
+        //Page<User> userPage = userMapper.selectPage(page, null);
+
+        //String s = JsonUtils.toJson(userPage);
         System.out.println(select);
     }
+    
 
 }
 

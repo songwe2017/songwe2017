@@ -1,6 +1,8 @@
 package com.admin.shiro.config;
 
-import com.admin.shiro.realm.DefaultRealm;
+import com.admin.shiro.UserRealm;
+import com.admin.shiro.cache.RedisCacheManager;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -24,31 +26,32 @@ public class ShiroConfig {
         
     // 创建 cookie 
     @Bean
-    public SimpleCookie simpleCookie() {
+    public SimpleCookie cookie() {
         SimpleCookie simpleCookie = new SimpleCookie();
+        // 每次浏览器访问都会在 cookie 里把这个值作为 key 传过来
         simpleCookie.setName("ShiroSession");
+        simpleCookie.setHttpOnly(true);
         return simpleCookie;
     }
-    
-    // 创建权限管理器
+
     @Bean
-    public DefaultWebSecurityManager securityManager(DefaultRealm realm,
-                                                     DefaultWebSessionManager sessionManager) {
-        DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(realm);
-        defaultWebSecurityManager.setSessionManager(sessionManager);
-        return defaultWebSecurityManager;
+    public CacheManager cacheManager() {
+        return new RedisCacheManager();
     }
-    
-    // 自定义 relam
+
     @Bean
-    public DefaultRealm defaultRelam() {
-        return new DefaultRealm();
+    public UserRealm defaultRelam() {
+        UserRealm userRealm = new UserRealm();
+        userRealm.setCachingEnabled(true);
+        userRealm.setAuthenticationCachingEnabled(true);
+        userRealm.setAuthenticationCacheName("authenticationCache");
+        userRealm.setAuthorizationCachingEnabled(true);
+        userRealm.setAuthorizationCacheName("authorizationCache");
+        return userRealm;
     }
-    
-    // 会话管理器
+
     @Bean
-    public DefaultWebSessionManager dsessionManager(SimpleCookie cookie) {
+    public DefaultWebSessionManager sessionManager(SimpleCookie cookie) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         // 开启 cookie
         sessionManager.setSessionIdCookieEnabled(true);
@@ -58,7 +61,19 @@ public class ShiroConfig {
         sessionManager.setSessionIdCookie(cookie);
         // 全局会话超时时间
         sessionManager.setGlobalSessionTimeout(360000);
+        
         return sessionManager;
+    } 
+    
+    @Bean
+    public DefaultWebSecurityManager securityManager(UserRealm realm,
+                                                     CacheManager cacheManager,
+                                                     DefaultWebSessionManager sessionManager) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(realm);
+        securityManager.setSessionManager(sessionManager);
+        securityManager.setCacheManager(cacheManager);
+        return securityManager;
     }
     
     // 创建声明周期管理器
@@ -66,14 +81,17 @@ public class ShiroConfig {
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
-    
-    // AOP 方式方法级权限检查，使用注解鉴权方式
+
+    /*
+     * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+     * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
+     */
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator advisor = new DefaultAdvisorAutoProxyCreator();
-        advisor.setProxyTargetClass(true);
-        return advisor;
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
     }
     
     @Bean
@@ -90,14 +108,16 @@ public class ShiroConfig {
         Map<String, String> filterMap = new HashMap<>();
         filterMap.put("/swagger/**", "anon");
         filterMap.put("/webjars/**", "anon");
-        filterMap.put("/statics/**", "anon");
+        filterMap.put("/assets/**", "anon");
         filterMap.put("/favicon.ico", "anon");
         filterMap.put("/captcha.jpg", "anon");
-        filterMap.put("/login.html", "anon");
+        filterMap.put("/admin/login", "anon");
+        filterMap.put("/admin/logout", "logout");
+        filterMap.put("/login", "anon");
         filterMap.put("/**", "authc");
         
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-        shiroFilterFactoryBean.setLoginUrl("/login.html"); // 设置未登录时访问未授权站点调转
+        shiroFilterFactoryBean.setLoginUrl("/login"); // 设置未登录时访问未授权站点调转
         shiroFilterFactoryBean.setUnauthorizedUrl("/"); // 设置登录后未授权站点跳转
         return shiroFilterFactoryBean;
     }

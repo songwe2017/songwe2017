@@ -1,6 +1,6 @@
 package com.admin.mapper;
 
-import com.admin.entity.Permission;
+import com.admin.model.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author songwe
- * @since 2022-05-20
+ * @since 2022-06-03
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 

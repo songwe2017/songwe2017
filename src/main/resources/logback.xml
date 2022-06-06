@@ -33,7 +33,7 @@
         <appender-ref ref="File"/>
     </logger>
     
-    <logger name="com.admin.demo.mapper" level="DEBUG" additivity="false">
+    <logger name="com.admin.mapper" level="DEBUG" additivity="false">
         <appender-ref ref="Console"/>
         <appender-ref ref="File"/>
     </logger>

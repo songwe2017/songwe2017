@@ -11,10 +11,11 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author songwe
- * @since 2022-05-20
+ * @since 2022-06-03
  */
 @Controller
 @RequestMapping("/permission")
 public class PermissionController {
 
 }
+

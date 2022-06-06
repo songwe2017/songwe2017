@@ -1,0 +1,52 @@
+package com.admin.shiro;
+
+import com.admin.common.constant.ShiroConstant;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.apache.shiro.web.util.WebUtils;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.Serializable;
+
+/**
+ * @author Songwe
+ * @since 2022/6/3 21:50
+ */
+public class ShiroSessionManager extends DefaultWebSessionManager {
+    
+    private static final String JWT_TOKEN_SESSION_ID_SOURCE = "jwt_token";
+    
+    private final JwtTokenManager jwtTokenManager;
+
+    public ShiroSessionManager(JwtTokenManager jwtTokenManager) {
+        this.jwtTokenManager = jwtTokenManager;
+    }
+
+    @Override
+    protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+        String token = WebUtils.toHttp(request).getHeader(ShiroConstant.TOKEN);
+        if (StringUtils.isEmpty(token)) {
+            // 走默认从 cookie 获取 sessionId
+            return super.getSessionId(request, response);
+        }
+        else {
+            // 从token 解析 sessionId
+            DecodedJWT decodedJWT = jwtTokenManager.resolveToken(token);
+            String id = decodedJWT.getId();
+
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, JWT_TOKEN_SESSION_ID_SOURCE);
+
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, id);
+            //automatically mark it valid here.  If it is invalid, the
+            //onUnknownSession method below will be invoked and we'll remove the attribute at that time.
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+            // always set rewrite flag - SHIRO-361
+            request.setAttribute(ShiroHttpServletRequest.SESSION_ID_URL_REWRITING_ENABLED, isSessionIdUrlRewritingEnabled());
+
+            return id;
+        }
+    }
+}

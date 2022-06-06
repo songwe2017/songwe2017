@@ -1,6 +1,6 @@
 package com.admin.service;
 
-import com.admin.entity.RolePermRel;
+import com.admin.model.RolePermRel;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author songwe
- * @since 2022-05-20
+ * @since 2022-06-03
  */
 public interface RolePermRelService extends IService<RolePermRel> {
 
