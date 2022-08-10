@@ -22,16 +22,29 @@ public class JsonUtils {
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     }
     
-    public static String toPrettyJson(Object obj) throws JsonProcessingException {
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+    public static String toPrettyJson(Object obj){
+        try {
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Json 转换异常", e);
+        }
     }
 
-    public static String toJson(Object obj) throws JsonProcessingException {
-        return mapper.writeValueAsString(obj);
+    public static String toJson(Object obj) {
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Json 转换异常", e);
+        }
     }
     
-    public static Map<String, Object> toMap(String json) throws JsonProcessingException {
-        return mapper.readValue(json, Map.class);
+    public static Map<String, Object> toMap(String json) {
+        try {
+            return mapper.readValue(json, Map.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Json 解析异常", e);
+        }
     }
     
     

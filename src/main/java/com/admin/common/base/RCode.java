@@ -1,4 +1,4 @@
-package com.admin.common.util;
+package com.admin.common.base;
 
 import lombok.Getter;
 

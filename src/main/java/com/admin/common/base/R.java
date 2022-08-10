@@ -1,4 +1,4 @@
-package com.admin.common.util;
+package com.admin.common.base;
 
 import com.admin.common.constant.Constant;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -108,6 +108,4 @@ public class R {
         this.data.put(key, value);
         return this;
     }
-    
-    
 }

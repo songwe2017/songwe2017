@@ -1,4 +1,4 @@
-package com.admin.common.util;
+package com.admin.common.base;
 
 import com.admin.common.enums.ResultEnum;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.admin.shiro;
 
 import com.admin.common.util.EncodeUtils;
+import com.admin.common.util.JsonUtils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -16,11 +17,9 @@ import java.util.Map;
  * @author Songwe
  * @since 2022/6/3 3:18
  */
-@Component
 public class JwtTokenManager {
     
-    @Value("${jwt.base64-encode-secret-key:jwtbase64secretkey}")
-    private String base64EncodeSecretKey;
+    private static final String JWT_SECRET_KEY = "base64EncodeSecretKey";
     
     /**
      * 1、header：
@@ -38,14 +37,14 @@ public class JwtTokenManager {
      * @param claims jwt存储的一些非隐私信息
      * @return
      */
-    public String issueToken(String iss, Long ttiMills, String sessionId, Map<String, Object> claims) {
+    public static String issueToken(String iss, Long ttiMills, String sessionId, Map<String, Object> claims) {
         if (MapUtils.isEmpty(claims)) {
             claims = new HashMap<>();
         }
 
         long now = System.currentTimeMillis();
         // 加密签名
-        String signature = EncodeUtils.encodeBase64(base64EncodeSecretKey.getBytes());
+        String signature = EncodeUtils.encodeBase64(JWT_SECRET_KEY.getBytes());
         
         // 构建令牌
         String sign = JWT.create().withPayload(claims)
@@ -57,16 +56,16 @@ public class JwtTokenManager {
         return sign;        
     }
     
-    public boolean verifyToken(String token) {
+    public static boolean verifyToken(String token) {
         // 加密签名
-        String signature = EncodeUtils.encodeBase64(base64EncodeSecretKey.getBytes());
+        String signature = EncodeUtils.encodeBase64(JWT_SECRET_KEY.getBytes());
         JWT.require(Algorithm.HMAC256(signature))
                 .build()
                 .verify(token);
         return true;
     }
     
-    public DecodedJWT resolveToken(String token) {
+    public static DecodedJWT resolveToken(String token) {
         return JWT.decode(token);
     }
 }

@@ -19,10 +19,15 @@
 	</properties>
 
 	<dependencies>
-		<!--redis-->
+		<!--spring boot 2.0以后默认使用lettuce-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!--lettuce 依赖commons-pool-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
 		</dependency>
 		<!-- velocity 模板引擎, Mybatis Plus 代码生成器需要 -->
 		<dependency>
@@ -35,6 +40,7 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.7.0</version>
+			
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>

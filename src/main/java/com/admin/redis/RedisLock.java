@@ -3,6 +3,7 @@ package com.admin.redis;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisLock {
     
-    private final Redisson redisson;
+    private final RedissonClient redisson;
 
     public RedisLock(RedissonManager manager) {
         this.redisson = manager.getRedisson();

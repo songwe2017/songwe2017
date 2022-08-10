@@ -3,17 +3,9 @@ package com.admin.redis.config;
 import com.admin.redis.RedisLock;
 import com.admin.redis.RedissonManager;
 import com.admin.redis.property.RedisProperties;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.Redisson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,12 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author songwe
- * @date 2019/6/19 下午11:55
+ * @since 2019/6/19 下午11:55
  */
 @Slf4j
 @Configuration
@@ -36,7 +27,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
     
     private final RedisProperties properties;
-
+    
     @Bean
     public RedisTemplate<String, Object>redisTemplate(RedisConnectionFactory factory){
         RedisTemplate<String,Object>template = new RedisTemplate<>();
@@ -52,7 +43,7 @@ public class RedisConfig {
     
     @Bean
     @ConditionalOnMissingBean
-    public RedissonManager redisManager() {
+    public RedissonManager redissonManager() {
         RedissonManager redissonManager = new RedissonManager(properties);
         log.info("[RedisManager]装配完成，当前连接方式:" + properties.getType() + ",连接地址:" + properties.getAddress());
         return redissonManager;
@@ -61,8 +52,7 @@ public class RedisConfig {
     @Bean
     @ConditionalOnMissingBean
     public RedisLock redisLock(RedissonManager redissonManager) {
-        RedisLock redisLock = new RedisLock(redissonManager);
-        return redisLock;
+        return new RedisLock(redissonManager);
     }
 }
 

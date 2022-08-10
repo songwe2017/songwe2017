@@ -1,15 +1,13 @@
 package com.admin.controller;
 
-import com.admin.common.util.R;
-import com.admin.common.util.Result;
+import com.admin.common.base.R;
+import com.admin.shiro.JwtTokenManager;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * @author Songwe
@@ -27,7 +25,6 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
-            
         }
         catch (UnknownAccountException e) {
             return R.failed().msg("用户名错误");
@@ -35,13 +32,11 @@ public class LoginController {
         catch (IncorrectCredentialsException e) {
             return R.failed().msg("密码错误");
         }
-        catch (LockedAccountException e) {
-            return R.failed().msg("账号已被锁定,请联系管理员");
-        }
         catch (Exception e) {
             return R.failed().msg("账户验证失败");
         }
-        return R.success();
+        String jwtToken = JwtTokenManager.issueToken(username, 30*60*1000L, subject.getSession().getId().toString(), null);
+        return R.success(jwtToken);
     }
     
     @GetMapping("/index.html")

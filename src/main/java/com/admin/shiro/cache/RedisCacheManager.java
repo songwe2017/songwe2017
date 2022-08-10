@@ -1,6 +1,7 @@
 package com.admin.shiro.cache;
 
 
+import com.admin.redis.RedissonManager;
 import org.apache.shiro.cache.AbstractCacheManager;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
@@ -16,6 +17,9 @@ public class RedisCacheManager extends AbstractCacheManager {
     
     @Autowired
     private RedisTemplate redisTemplate;
+    
+    @Autowired
+    private RedissonManager redissonManager;
     
     @Override
     public Cache createCache(String name) throws CacheException {

@@ -1,11 +1,19 @@
 package com.admin.shiro.filter;
 
+import com.admin.common.constant.ShiroConstant;
+import com.admin.redis.RedissonManager;
 import lombok.RequiredArgsConstructor;
-import org.apache.shiro.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.session.ExpiredSessionException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.UnknownSessionException;
+import org.apache.shiro.session.mgt.DefaultSessionKey;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.redisson.api.RDeque;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,27 +22,19 @@ import javax.servlet.ServletResponse;
 
 /**
  * 在线并发人数控制
- *  1、只针对登录用户控制，判断是否登录
- *  2、用 redis 创建队列
- *  3、判断当前 sessionId 是否存在此用户队列
- *  4、不存在则将 sessionId 放入队列尾端
- *  5、存在则判断当前队列大小是否超过限定登录人数
- *  6、超过：从队列头获取 sessionId，从 sessionManager 取出 session，从 sessionDao 移除该 session
- *  7、未超过：放过
  * @author Songwe
  * @since 2022/6/3 2:02
  */
-//@Component 
+@Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class KickOutAccessControlFilter extends AccessControlFilter {
     
-    // todo 集成 reids
+    private final RedissonClient redisson;
     
     private final SessionDAO sessionDAO;
     
     private final SessionManager sessionManager;
-    
-    
+
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         return false;
@@ -46,7 +46,38 @@ public class KickOutAccessControlFilter extends AccessControlFilter {
         if (!subject.isAuthenticated()) {
             return true;
         }
+        String loginUser = (String) subject.getPrincipal();
+        String sessionId = subject.getSession().getId().toString();
 
-        return false;
+        RDeque<String> deque = redisson.getDeque(ShiroConstant.LOGIN_NUM_CACHE + loginUser);
+        // 判断当前 sessionId 是否存在此用户队列
+        boolean contains = deque.contains(sessionId);
+        if (!contains) {
+            deque.addLast(sessionId);
+        }
+        
+        if (deque.size() > ShiroConstant.MAX_LOGIN_NUM) {
+            // 获取队列头部 sessionId
+            String first = deque.getFirst();
+            Session session = null;
+            try {
+                session = sessionManager.getSession(new DefaultSessionKey(first));
+            } 
+            catch (UnknownSessionException e) {
+                log.warn("session已失效，sessionId：{}", first);
+            }
+            catch (ExpiredSessionException e) {
+                log.warn("session已过期，sessionId：{}", first);
+            }
+            // 删除 session
+            if (session != null) {
+                log.debug("移除 session 信息，sessionId：{}", first);
+                sessionDAO.delete(session);
+            }
+            // 移除队列头部 sessionId
+            deque.removeFirst();
+        }
+        
+        return true;
     }
 }

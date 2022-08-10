@@ -9,6 +9,7 @@ import com.admin.redis.strategy.impl.SentineConfigImpl;
 import com.admin.redis.strategy.impl.StandaloneConfigImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.util.Assert;
 
@@ -22,7 +23,7 @@ import org.springframework.util.Assert;
 @Slf4j
 public class RedissonManager {
     
-    private final Redisson redisson;
+    private final RedissonClient redisson;
 
     public RedissonManager(RedisProperties redisProperties) {
         try {
@@ -36,7 +37,7 @@ public class RedissonManager {
         }
     }
 
-    public Redisson getRedisson() {
+    public RedissonClient getRedisson() {
         return redisson;
     }
 

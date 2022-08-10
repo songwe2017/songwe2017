@@ -1,6 +1,5 @@
 package com.admin.shiro;
 
-import com.admin.common.constant.ShiroConstant;
 import com.admin.model.User;
 import com.admin.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -9,11 +8,12 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author Songwe
@@ -23,14 +23,10 @@ public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
-    
-    //private CacheManager cacheManager;
-    //
-    //@Override
-    //public void setCacheManager(CacheManager cacheManager) {
-    //    this.cacheManager = cacheManager;
-    //}
 
+    @Autowired
+    private CredentialsMatcher credentialsMatcher;
+    
     // 授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -56,12 +52,9 @@ public class UserRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(loginUser, user.getPassword(), ShiroByteSource.Util.bytes(user.getSalt()), getName());
     }
 
-    @Override
-    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
-        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
-        matcher.setHashAlgorithmName(ShiroConstant.HASH_ALGORITHM);
-        matcher.setHashIterations(ShiroConstant.HASH_ITERATIONS);
-        super.setCredentialsMatcher(matcher);
+    @PostConstruct
+    public void setCredentialsMatcher() {
+        super.setCredentialsMatcher(credentialsMatcher);
     }
     
 }
